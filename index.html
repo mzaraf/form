@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color:#45a049;
+
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            color: #555;
+        }
+        input[type="text"], input[type="tel"], input[type="email"], input[type="date"], input[type="file"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group.required label::after {
+            content: " *";
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Data Request Form</h2>
+        <form id="organizationForm" action="#" method="post" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
+            <div class="form-group required">
+                <label for="org_name">Name of organization/institution:</label>
+                <input type="text" id="org_name" name="org_name" required>
+            </div>
+            <div class="form-group required">
+                <label for="org_type">Organization type:</label>
+                <input type="text" id="org_type" name="org_type" required>
+            </div>
+            <div class="form-group required">
+                <label for="contact_name">Contact name:</label>
+                <input type="text" id="contact_name" name="contact_name" required>
+            </div>
+            <div class="form-group required">
+                <label for="contact_phone">Contact phone number:</label>
+                <input type="tel" id="contact_phone" name="contact_phone" required>
+            </div>
+            <div class="form-group required">
+                <label for="contact_email">Contact email:</label>
+                <input type="email" id="contact_email" name="contact_email" required>
+            </div>
+            <div class="form-group required">
+                <label for="topic_interest">Topic of interest:</label>
+                <input type="text" id="topic_interest" name="topic_interest" required>
+            </div>
+            <div class="form-group required">
+                <label for="desc_interest">Description of area of interest:</label>
+                <textarea id="desc_interest" name="desc_interest" rows="4" cols="50" required></textarea>
+            </div>
+            <div class="form-group required">
+                <label for="town_interest">Town of interest:</label>
+                <input type="text" id="town_interest" name="town_interest" required>
+            </div>
+            <div class="form-group required">
+                <label for="lga_interest">LGA of interest:</label>
+                <input type="text" id="lga_interest" name="lga_interest" required>
+            </div>
+            <!-- <div>
+                <label for="lga_interest">LGA of interest:</label>
+                <input type="text" list="lgas_interest" id="lga_interest" name="lga_interest"/>
+                <datalist id="lgas_interests">
+                    <option value="Umahia"></option>
+                    <option value="Yola"></option>
+                    <option value="Uyo"></option>
+                </datalist>
+            </div> -->
+            <div class="form-group required">
+                <label for="state_interest">State of interest:</label>
+                <input type="text" id="state_interest" name="state_interest" required>
+            </div>
+            <!-- <div>
+                <label for="state_interest">State of interest:</label>
+                <input type="text" list="states_interest" id="state_interest" name="state_interest"/>
+                <datalist id="states_interests">
+                    <option value="Abia"></option>
+                    <option value="Adamawa"></option>
+                    <option value="Akwa Ibom"></option>
+                </datalist>
+            </div> -->
+            <div class="form-group required">
+                <label for="img_res1">Image Resolution 1:</label>
+                <input type="text" id="img_res1" name="img_res1" required>
+            </div>
+            <div class="form-group">
+                <label for="img_res2">Image Resolution 2:</label>
+                <input type="text" id="img_res2" name="img_res2">
+            </div>
+            <div class="form-group required">
+                <label for="start_date">Start date:</label>
+                <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="end_date">End date:</label>
+                <input type="date" id="end_date" name="end_date">
+            </div>
+            <div class="form-group required">
+                <label for="proj_app_area">Project application area:</label>
+                <input type="text" id="proj_app_area" name="proj_app_area" required>
+            </div>
+            <div class="form-group">
+                <label for="shapefile">Upload shapefile:</label>
+                <input type="file" id="shapefile" name="shapefile" accept=".shp,.zip">
+            </div>
+            <div class="form-group">
+                <!-- <label for="timestamp">Timestamp:</label> -->
+                <input type="hidden" id="timestamp" name="timestamp" readonly>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevents the default form submission
+            alert('Request submitted successfully!');
+            event.target.submit(); // Submits the form after showing the alert
+        }
+
+        function setGMTPlusOneTime() {
+            const now = new Date();
+            const gmtPlusOneOffset = 60 * 60 * 1000; // GMT+1 in milliseconds
+            const gmtPlusOneTime = new Date(now.getTime() + gmtPlusOneOffset);
+            const formattedTime = gmtPlusOneTime.toISOString().slice(0, 19).replace('T', ' ');
+            document.getElementById('timestamp').value = formattedTime;
+        }
+
+        setGMTPlusOneTime();
+    </script>
+</body>
+</html>
